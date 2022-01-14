@@ -1,7 +1,7 @@
 import pyodbc
 import pandas as pd
 
-cnxn = pyodbc.connect(Driver='{SQL Server};Server=tcp:c1ylwjuviw.database.windows.net,1433;Database=DbGeniusCS;Uid=********;Pwd=HNG:*********:@y;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+cnxn = pyodbc.connect(Driver='{SQL Server};Server=tcp:cuviw.database.windows.net,1433;Database=DbGeniusCS;Uid=********;Pwd=HNG:*********:@y;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 #cnxn.autocommit = True
 
 
