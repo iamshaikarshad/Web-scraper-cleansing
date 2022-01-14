@@ -45,7 +45,7 @@ Summary of Batch Files as of today:
 
 Regards,
 
-MyUtilityGenius"""
+Company-name"""
 
     html = """
 <html>
@@ -59,7 +59,7 @@ MyUtilityGenius"""
 <p>Summary of Batch Files as of today:</p>
 {table}
 <p>Regards,</p>
-<p>MyUtilityGenius</p>
+<p>company-name</p>
 </body></html>
 """
 
