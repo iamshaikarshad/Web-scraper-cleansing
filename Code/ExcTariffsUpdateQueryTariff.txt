@@ -1,0 +1,30 @@
+SET NOCOUNT ON;
+---Table Variabe declaration
+DECLARE @ColumnName		          NVARCHAR(255) =  ?  
+DECLARE @tableInputs              [Simulator].[type_tbl_FinalExclusiveTariffs]
+
+
+INSERT INTO @tableInputs (RowIdExclusiveTariffs,RequestId,SupplierName,TariffName, StandingCharge, PrimaryUnitRate, NightUnitRate,IsFixedDuration,IsFixedDynamic,ValidTo,FixedMonths,IsGreen,Discount,ExitFee,PCWSiteId)
+
+SELECT RowIdExclusiveTariffs,
+RequestId ,SupplierName,TariffName, StandingCharge, PrimaryUnitRate,NightUnitRate, IsFixedDuration,IsFixedDynamic,ValidTo,FixedMonths, IsGreen,Discount,ExitFee,PCWSiteId
+FROM OPENJSON(?)
+WITH (
+        RowIdExclusiveTariffs     bigint '$.RowIdExclusiveTariffs',
+	RequestId                 int '$.RequestId',
+	SupplierName              nvarchar '$.SupplierName',
+	TariffName                nvarchar '$.TariffName',
+	StandingCharge            decimal(18, 6) '$.StandingCharge',
+	PrimaryUnitRate           decimal(18, 6) '$.UnitRate',
+	NightUnitRate             decimal(18, 6) '$.NightUnitRate',
+	IsFixedDuration           bit '$.IsFixedDuration',
+	IsFixedDynamic            bit '$.IsFixedDynamic',
+	ValidTo                   datetime '$.ValidTo',
+	FixedMonths               tinyint '$.FixedMonths',
+	IsGreen                   bit '$.Green',
+	Discount                  decimal(7, 3) '$.Discounts',
+	ExitFee                   decimal(7, 3) '$.ExitFee',
+	PCWSiteId                 tinyint '$.PCWSiteId'
+)
+
+EXEC [Simulator].[SpUpdateFinalExclusiveTariffs]  @ColumnName, @tableInputs 

@@ -1,0 +1,26 @@
+SET NOCOUNT ON;
+---Table Variabe declaration
+DECLARE @ColumnName		          NVARCHAR(255) =  ?  
+DECLARE @tableInputs              [Simulator].[type_tbl_FinalExclusiveTariffs]
+
+
+INSERT INTO @tableInputs (RowIdExclusiveTariffs,RequestId,SupplierName,TariffName,StandingCharge,PrimaryUnitRate,NightUnitRate,IsGreen,Discount,ExitFee,PCWSiteId,PaymentId)
+
+SELECT RowIdExclusiveTariffs,RequestId,SupplierName,TariffName,StandingCharge,PrimaryUnitRate,NightUnitRate,IsGreen,Discount,ExitFee,PCWSiteId,PaymentId
+FROM OPENJSON(?)
+WITH (
+    RowIdExclusiveTariffs         bigint '$.RowIdExclusiveTariffs',
+	RequestId                 int '$.RequestId',
+	SupplierName              nvarchar '$.SupplierName',
+	TariffName                nvarchar '$.TariffName',
+	StandingCharge            decimal(18, 6) '$.StandingCharge',
+	PrimaryUnitRate           decimal(18, 6) '$.UnitRate',
+	NightUnitRate             decimal(18, 6) '$.NightUnitRate',
+	IsGreen                   bit '$.Green',
+	Discount                  decimal(7, 3) '$.Discounts',
+	ExitFee                   decimal(7, 3) '$.ExitFees',
+	PCWSiteId                 tinyint '$.PCWSiteId',
+        PaymentId                 tinyint '$.PaymentId'
+)
+
+EXEC [Simulator].[SpUpdateFinalExclusiveTariffs]  @ColumnName, @tableInputs 
