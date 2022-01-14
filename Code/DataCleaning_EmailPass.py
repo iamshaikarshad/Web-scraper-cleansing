@@ -6,9 +6,9 @@ Created on Thu Oct  1 13:10:56 2020
 """
 
 def emailID():
-    email = 'batchfiledomestic@myutilitygenius.co.uk'
+    email = 'batchfiledomestic@companyname.co.uk'
     return email
 
 def emailPass():
-    password = 'n6w@cct56!'
+    password = 'n6w@cdasdact56!'
     return password
