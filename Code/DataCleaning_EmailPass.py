@@ -10,5 +10,5 @@ def emailID():
     return email
 
 def emailPass():
-    password = 'n6w@cdasdact56!'
+    password = '********'
     return password
